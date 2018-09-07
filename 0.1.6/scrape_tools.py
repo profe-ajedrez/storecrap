@@ -9,7 +9,11 @@ import re
 from requests_html import HTMLSession
 from requests_html import MaxRetries
 from bs4 import BeautifulSoup
+import datetime
 import math
+import json
+import settings
+import utils
 
 
 def render_html(session, url):
@@ -108,7 +112,7 @@ def get_num_pages(soap, target):
     return num_pages
 
 
-def add_products(target, soap, producto):
+def add_products(target, soap, productos):
     '''
     
     '''
@@ -132,9 +136,8 @@ def add_products(target, soap, producto):
             valores.append(re.sub('[^0-9]','', precio.text))
 
         dp['precios'] = valores
-
-    productos.append(dp)
-    print('agregado producto ' + dp['articulo'])
+        productos.append(dp)
+        print('agregado producto ' + dp['articulo'])
     i += 1
 
     return i
@@ -143,7 +146,7 @@ def add_products(target, soap, producto):
 def save_productos(productos, file_name=''):
     if len( productos) > 0:
         print('guardando productos')
-        if not file_name.strip:
+        if file_name.strip:
             now = datetime.datetime.now()
             file_name = settings.directory + '/' + 'log_' + now.isoformat().strip() + '.log'
 

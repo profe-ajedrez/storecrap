@@ -5,7 +5,6 @@
 from requests_html import HTMLSession
 from requests_html import MaxRetries
 from bs4 import BeautifulSoup
-import json
 import re
 import datetime
 import time
@@ -56,3 +55,4 @@ def  target_loop(target, file_name=''):
                     
                 print('Cantidad de productos procesados: ', n_prod)
 
+    return productos
